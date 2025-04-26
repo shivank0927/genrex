@@ -72,8 +72,17 @@ class Calculator(QWidget):
             try:
                 result = eval(expression)
                 self.textBox.setText(str(result))
-            except Exception as e:
-                self.textBox.setText(f"error: {e}")
+            except SyntaxError:
+                self.textBox.setText(f"incomplete expression")
+            except NameError:
+                self.textBox.setText(f"error occured")
+            except ZeroDivisionError:
+                self.textBox.setText(f"can't divide by 0, dumbass")
+            except ValueError:
+                self.textBox.setText(f"value error")
+            except Exception:
+                self.textBox.setText(f"{Exception}")
+            
 
         elif symbol == "C":
             self.textBox.clear()
